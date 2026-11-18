@@ -3,357 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="Explore the commands and features available in AMARA Symphora, the all-in-one Discord bot."
-  >
-
   <meta name="theme-color" content="#080D1A">
-
+  <meta name="description" content="Explore AMARA Symphora slash commands and features.">
   <title>Commands | AMARA Symphora</title>
-
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* COMMAND DIRECTORY */
+    .command-page {
+      width: min(1100px, 90%);
+      margin: auto;
+      padding: 90px 0 100px;
+    }
 
     .command-hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding: 105px 8% 85px;
       text-align: center;
-
-      background:
-        radial-gradient(
-          ellipse at 50% 10%,
-          rgba(74, 120, 255, 0.23),
-          transparent 60%
-        ),
-        linear-gradient(
-          180deg,
-          #080D1A,
-          #0B1428
-        );
+      margin-bottom: 45px;
     }
 
     .command-hero h1 {
-      font-size: clamp(40px, 7vw, 68px);
-      letter-spacing: -2px;
-      margin-bottom: 18px;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      margin: 12px 0;
     }
 
     .command-hero h1 span {
-      color: var(--bright);
-      text-shadow: 0 0 25px rgba(74,120,255,0.3);
+      color: #4A78FF;
     }
 
-    .command-hero p {
-      max-width: 600px;
+    .command-hero p.description {
+      color: #9AA9C5;
+      max-width: 620px;
       margin: 0 auto;
-      color: var(--muted);
-      font-size: 15px;
+      line-height: 1.8;
     }
 
-    .command-summary {
+    .command-stats {
       display: flex;
       justify-content: center;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 18px;
-      margin-top: 38px;
+      margin-top: 30px;
     }
 
-    .summary-item {
-      min-width: 125px;
-      padding: 17px 23px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: rgba(20, 35, 65, 0.55);
+    .command-stat {
+      background: rgba(23, 36, 64, 0.7);
+      border: 1px solid rgba(148, 174, 255, 0.14);
+      border-radius: 14px;
+      padding: 15px 24px;
+      min-width: 115px;
     }
 
-    .summary-item strong {
+    .command-stat strong {
       display: block;
-      color: var(--bright);
-      font-size: 27px;
+      color: #E2E8F0;
+      font-size: 1.5rem;
     }
 
-    .summary-item span {
-      color: var(--muted);
-      font-size: 12px;
+    .command-stat span {
+      color: #9AA9C5;
+      font-size: 0.8rem;
     }
 
-    /* DIRECTORY CONTENT */
-
-    .directory {
-      padding: 80px 8% 110px;
-      background:
-        radial-gradient(
-          ellipse at 50% 0%,
-          rgba(42, 82, 190, 0.08),
-          transparent 60%
-        ),
-        var(--background);
+    .command-search {
+      width: 100%;
+      margin: 35px 0 25px;
     }
 
-    .directory-heading {
-      text-align: center;
-      margin-bottom: 48px;
+    .command-search input {
+      width: 100%;
+      padding: 17px 20px;
+      color: #E2E8F0;
+      background: #101A30;
+      border: 1px solid rgba(148, 174, 255, 0.2);
+      border-radius: 14px;
+      outline: none;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border 0.2s, box-shadow 0.2s;
     }
 
-    .directory-heading h2 {
-      font-size: clamp(27px, 5vw, 38px);
-      margin-bottom: 12px;
+    .command-search input:focus {
+      border-color: #4A78FF;
+      box-shadow: 0 0 20px rgba(74, 120, 255, 0.12);
     }
 
-    .directory-heading p {
-      color: var(--muted);
-      font-size: 14px;
+    .command-search input::placeholder {
+      color: #71809E;
     }
 
-    .category-group {
-      max-width: 1200px;
-      margin: 0 auto 65px;
+    .command-list {
+      display: grid;
+      gap: 13px;
     }
 
-    .group-title {
+    .command-category {
+      background: rgba(16, 26, 48, 0.85);
+      border: 1px solid rgba(148, 174, 255, 0.14);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .command-category:hover {
+      border-color: rgba(74, 120, 255, 0.5);
+    }
+
+    .category-toggle {
+      width: 100%;
       display: flex;
       align-items: center;
-      gap: 13px;
-      margin-bottom: 22px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--border);
+      justify-content: space-between;
+      gap: 15px;
+      padding: 20px 22px;
+      color: #E2E8F0;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
     }
 
-    .group-title h3 {
-      font-size: 19px;
-      letter-spacing: 0.5px;
+    .category-name {
+      font-weight: 700;
+      font-size: 1rem;
     }
 
-    .group-title span {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .category-card {
-      position: relative;
-      overflow: hidden;
-      padding: 27px 24px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(30, 48, 83, 0.68),
-          rgba(12, 22, 42, 0.9)
-        );
-
-      border: 1px solid rgba(148, 174, 255, 0.16);
-      border-radius: 15px;
-
-      transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-    }
-
-    .category-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-
-      background: linear-gradient(
-        90deg,
-        transparent,
-        #4A78FF,
-        transparent
-      );
-
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .category-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(74, 120, 255, 0.5);
-
-      box-shadow:
-        0 15px 35px rgba(20, 55, 130, 0.16);
-    }
-
-    .category-card:hover::before {
-      opacity: 1;
-    }
-
-    .category-icon {
-      font-size: 30px;
-      margin-bottom: 15px;
-    }
-
-    .category-card h4 {
-      color: var(--silver);
-      font-size: 16px;
-      margin-bottom: 9px;
-    }
-
-    .category-card p {
-      min-height: 44px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .command-count {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 11px;
-
-      color: #AFC4FF;
-      background: rgba(74, 120, 255, 0.11);
-      border: 1px solid rgba(74, 120, 255, 0.18);
-      border-radius: 7px;
-
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 0.3px;
-    }
-
-    /* COMMAND USAGE */
-
-    .usage-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 32px;
-      text-align: center;
-
-      background: rgba(20, 35, 65, 0.48);
-      border: 1px solid var(--border);
-      border-radius: 17px;
-    }
-
-    .usage-section h2 {
-      margin-bottom: 14px;
-      font-size: 23px;
-    }
-
-    .usage-section p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .usage-tags {
+    .category-meta {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
       gap: 12px;
-      margin-top: 22px;
+      color: #9AA9C5;
+      font-size: 0.82rem;
     }
 
-    .usage-tag {
-      padding: 10px 17px;
-      color: var(--silver);
-      background: rgba(74, 120, 255, 0.12);
-      border: 1px solid rgba(74, 120, 255, 0.2);
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 14px;
+    .category-count {
+      background: rgba(74, 120, 255, 0.14);
+      color: #8EACFF;
+      padding: 5px 10px;
+      border-radius: 20px;
     }
 
-    /* INVITE */
+    .category-arrow {
+      color: #8EACFF;
+      transition: transform 0.2s;
+    }
 
-    .command-invite {
-      padding: 75px 8%;
+    .command-category.open .category-arrow {
+      transform: rotate(180deg);
+    }
+
+    .category-content {
+      display: none;
+      padding: 0 20px 20px;
+    }
+
+    .command-category.open .category-content {
+      display: block;
+    }
+
+    .command-items {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .command-item {
+      padding: 14px 15px;
+      border: 1px solid rgba(148, 174, 255, 0.1);
+      background: rgba(8, 13, 26, 0.55);
+      border-radius: 11px;
+    }
+
+    .command-item code {
+      display: inline-block;
+      color: #8EACFF;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .command-item p {
+      color: #9AA9C5;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .command-empty {
+      display: none;
       text-align: center;
-
-      background:
-        radial-gradient(
-          ellipse at 50% 50%,
-          rgba(74, 120, 255, 0.14),
-          transparent 65%
-        ),
-        #080D18;
+      color: #9AA9C5;
+      padding: 35px 15px;
+      background: rgba(16, 26, 48, 0.7);
+      border-radius: 14px;
     }
 
-    .command-invite h2 {
-      font-size: clamp(26px, 5vw, 36px);
-      margin-bottom: 13px;
+    .command-note {
+      margin-top: 35px;
+      padding: 22px;
+      background: rgba(42, 82, 190, 0.09);
+      border: 1px solid rgba(74, 120, 255, 0.18);
+      border-radius: 14px;
+      color: #9AA9C5;
+      line-height: 1.8;
+      font-size: 0.9rem;
     }
 
-    .command-invite p {
-      color: var(--muted);
-      margin-bottom: 25px;
-      font-size: 14px;
+    .command-note strong {
+      color: #E2E8F0;
     }
 
-    /* MOBILE */
-
-    @media (max-width: 850px) {
-      .category-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    .command-back {
+      text-align: center;
+      margin-top: 35px;
     }
 
-    @media (max-width: 600px) {
-      .command-hero {
-        padding: 85px 6% 65px;
+    @media (max-width: 650px) {
+      .command-page {
+        padding-top: 65px;
       }
 
-      .command-hero h1 {
-        letter-spacing: -1.5px;
-      }
-
-      .command-hero p {
-        font-size: 14px;
-      }
-
-      .command-summary {
-        gap: 10px;
-      }
-
-      .summary-item {
-        min-width: 105px;
-        padding: 13px 15px;
-      }
-
-      .summary-item strong {
-        font-size: 23px;
-      }
-
-      .directory {
-        padding: 65px 6% 80px;
-      }
-
-      .category-grid {
+      .command-items {
         grid-template-columns: 1fr;
-        gap: 14px;
       }
 
-      .category-card {
-        padding: 24px 21px;
+      .category-toggle {
+        padding: 17px 15px;
       }
 
-      .category-card p {
-        min-height: auto;
-      }
-
-      .group-title h3 {
-        font-size: 17px;
-      }
-
-      .usage-section {
-        padding: 25px 18px;
-      }
-
-      .command-invite {
-        padding: 60px 6%;
+      .category-content {
+        padding: 0 13px 14px;
       }
     }
   </style>
@@ -361,260 +239,349 @@
 
 <body>
 
-  <!-- NAVIGATION -->
-
   <header>
     <nav class="navbar">
       <div class="logo">AMARA <span>SYMPHORA</span></div>
-
-      <a class="nav-link" href="index.html">Home</a>
-      <a class="nav-link" href="index.html#features">Features</a>
-      <a class="nav-link" href="commands.html">Commands</a>
-      <a class="nav-link" href="index.html#about">About</a>
+      <a href="index.html#home" class="nav-link">Home</a>
+      <a href="index.html#features" class="nav-link">Features</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="commands.html" class="nav-link">Commands</a>
     </nav>
   </header>
 
-  <!-- HERO -->
+  <main class="command-page">
 
-  <section class="command-hero">
-    <div class="eyebrow">COMMAND DOCUMENTATION</div>
-
-    <h1>Explore <span>AMARA.</span></h1>
-
-    <p>
-      Welcome to the AMARA Symphora command directory.
-      Explore music, audio settings, server tools,
-      security, community features, and more.
-    </p>
-
-    <div class="command-summary">
-      <div class="summary-item">
-        <strong>110</strong>
-        <span>Available Commands</span>
-      </div>
-
-      <div class="summary-item">
-        <strong>17</strong>
-        <span>Categories</span>
-      </div>
-
-      <div class="summary-item">
-        <strong>3</strong>
-        <span>Help Pages</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIRECTORY -->
-
-  <main class="directory">
-
-    <div class="directory-heading">
-      <h2>Command Directory</h2>
-      <p>Discover what AMARA can do for your Discord server.</p>
-    </div>
-
-    <!-- PAGE 1 -->
-
-    <section class="category-group">
-      <div class="group-title">
-        <h3>PAGE 01</h3>
-        <span>Music & Community</span>
-      </div>
-
-      <div class="category-grid">
-
-        <article class="category-card">
-          <div class="category-icon">🎵</div>
-          <h4>Music</h4>
-          <p>Music playback, queue controls, and track rankings.</p>
-          <span class="command-count">18 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🎚️</div>
-          <h4>Audio Settings</h4>
-          <p>Customize playback and sound effects.</p>
-          <span class="command-count">6 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🎉</div>
-          <h4>Giveaway</h4>
-          <p>Create and manage server giveaways.</p>
-          <span class="command-count">3 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">👤</div>
-          <h4>User & Social</h4>
-          <p>Listener profiles, achievements, and server rankings.</p>
-          <span class="command-count">4 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🛡️</div>
-          <h4>Security</h4>
-          <p>Server protection and security logging.</p>
-          <span class="command-count">9 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">👋</div>
-          <h4>Community</h4>
-          <p>Welcome and goodbye message management.</p>
-          <span class="command-count">6 Commands</span>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- PAGE 2 -->
-
-    <section class="category-group">
-      <div class="group-title">
-        <h3>PAGE 02</h3>
-        <span>Games & Server Management</span>
-      </div>
-
-      <div class="category-grid">
-
-        <article class="category-card">
-          <div class="category-icon">🎮</div>
-          <h4>Arcade & Games</h4>
-          <p>Trivia, riddles, and math challenges.</p>
-          <span class="command-count">3 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">⚙️</div>
-          <h4>Server Settings</h4>
-          <p>Configure server features, verification, and voice settings.</p>
-          <span class="command-count">8 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">📡</div>
-          <h4>Game Monitor</h4>
-          <p>Monitor SA-MP, FiveM, Minecraft Java, and Bedrock servers.</p>
-          <span class="command-count">6 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🔨</div>
-          <h4>Moderation</h4>
-          <p>Server moderation and member management.</p>
-          <span class="command-count">13 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">ℹ️</div>
-          <h4>Information</h4>
-          <p>Bot information, server details, and useful utilities.</p>
-          <span class="command-count">9 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🌐</div>
-          <h4>Global Network</h4>
-          <p>Global listener rankings and network dashboards.</p>
-          <span class="command-count">4 Commands</span>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- PAGE 3 -->
-
-    <section class="category-group">
-      <div class="group-title">
-        <h3>PAGE 03</h3>
-        <span>Monitoring & Administration</span>
-      </div>
-
-      <div class="category-grid">
-
-        <article class="category-card">
-          <div class="category-icon">📊</div>
-          <h4>Bot Status Monitor</h4>
-          <p>Monitor bot availability and downtime.</p>
-          <span class="command-count">4 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">💡</div>
-          <h4>Suggestions</h4>
-          <p>Community ideas, voting, and admin decisions.</p>
-          <span class="command-count">6 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🎫</div>
-          <h4>Ticket System</h4>
-          <p>Manage support tickets and staff access.</p>
-          <span class="command-count">5 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">🔧</div>
-          <h4>Administration</h4>
-          <p>Owner and server administration tools.</p>
-          <span class="command-count">3 Commands</span>
-        </article>
-
-        <article class="category-card">
-          <div class="category-icon">⭐</div>
-          <h4>EXP & Leveling</h4>
-          <p>Global experience, daily rewards, and level progress.</p>
-          <span class="command-count">3 Commands</span>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- USAGE -->
-
-    <section class="usage-section">
-      <h2>Command System</h2>
-
-      <p>
-        AMARA supports slash commands and prefix commands.
-        Use the displayed prefix for commands that support prefix mode.
+    <section class="command-hero">
+      <p class="eyebrow">COMMAND DIRECTORY</p>
+      <h1>Explore <span>Commands.</span></h1>
+      <p class="description">
+        Discover the tools and features available in AMARA Symphora.
+        Find the command you need and explore its functionality.
       </p>
 
-      <div class="usage-tags">
-        <span class="usage-tag">Slash Commands /</span>
-        <span class="usage-tag">Prefix Commands !</span>
+      <div class="command-stats">
+        <div class="command-stat">
+          <strong id="totalCommands">0</strong>
+          <span>Listed Commands</span>
+        </div>
+
+        <div class="command-stat">
+          <strong id="totalCategories">0</strong>
+          <span>Categories</span>
+        </div>
+
+        <div class="command-stat">
+          <strong>/</strong>
+          <span>Slash Commands</span>
+        </div>
       </div>
     </section>
+
+    <div class="command-search">
+      <input
+        type="search"
+        id="commandSearch"
+        placeholder="Search commands... e.g. play, ban, rank"
+        autocomplete="off"
+      >
+    </div>
+
+    <section class="command-list" id="commandList"></section>
+
+    <div class="command-empty" id="commandEmpty">
+      No commands found. Try another keyword.
+    </div>
+
+    <div class="command-note">
+      <strong>How to use commands</strong><br>
+      Use the slash command format directly in your Discord server.
+      For example: <code>/play</code> or <code>/help</code>.<br><br>
+      Prefix commands are available only for commands that support prefix mode.
+    </div>
+
+    <div class="command-back">
+      <a href="index.html" class="button secondary">Back to Home</a>
+    </div>
 
   </main>
 
-  <!-- INVITE -->
-
-  <section class="command-invite">
-    <h2>Ready to experience AMARA?</h2>
-
-    <p>
-      Bring music, entertainment, and community features
-      to your Discord server.
-    </p>
-
-    <a
-      href="https://discord.com/oauth2/authorize?client_id=1045765217239441409&permissions=274923121856&integration_type=0&scope=bot+applications.commands"
-      class="button primary"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Invite AMARA
-    </a>
-  </section>
-
-  <!-- FOOTER -->
-
   <footer>
+    <div class="logo">AMARA <span>SYMPHORA</span></div>
     <p>© 2026 AMARA Symphora. All rights reserved.</p>
   </footer>
 
+  <script>
+    const categories = [
+      {
+        name: "Music",
+        commands: [
+          ["play", "Play music from a supported source."],
+          ["stop", "Stop playback."],
+          ["skip", "Skip the current track."],
+          ["nowplaying", "Show the currently playing track."],
+          ["leave", "Make AMARA leave the voice channel."],
+          ["loop", "Control the playback loop mode."],
+          ["pause", "Pause the current track."],
+          ["queue", "View the music queue."],
+          ["lyrics", "Find lyrics for a track."],
+          ["join", "Join your voice channel."],
+          ["247", "Control 24/7 voice channel mode."],
+          ["resume", "Resume paused playback."],
+          ["autoplay", "Control automatic track suggestions."],
+          ["replay", "Replay the current track."],
+          ["previous", "Return to the previous track."],
+          ["shuffle", "Shuffle the music queue."],
+          ["seek", "Move to a position in the current track."]
+        ]
+      },
+      {
+        name: "Audio Settings",
+        commands: [
+          ["bassboost", "Adjust the bass enhancement."],
+          ["equalizer", "Adjust audio equalizer settings."],
+          ["volume", "Change playback volume."],
+          ["filter", "Apply an audio filter."],
+          ["filters", "View or manage audio filters."],
+          ["settings", "Manage available settings."]
+        ]
+      },
+      {
+        name: "Giveaway",
+        commands: [
+          ["giveaway", "Create and manage giveaways."]
+        ]
+      },
+      {
+        name: "User & Social",
+        commands: [
+          ["daily", "Claim your daily reward."],
+          ["profile", "View a user profile."],
+          ["mystats", "View your personal statistics."],
+          ["user", "View user information."],
+          ["badges", "View available user badges."],
+          ["anniversary", "View anniversary information."]
+        ]
+      },
+      {
+        name: "Security",
+        commands: [
+          ["blacklist", "Manage the bot blacklist."],
+          ["antiraid", "Manage anti-raid protection."],
+          ["antilink", "Manage anti-link protection."],
+          ["verify", "Use the server verification feature."],
+          ["securitylog", "View or configure security logs."]
+        ]
+      },
+      {
+        name: "Community",
+        commands: [
+          ["global", "Access global community features."],
+          ["globalpulse", "View global network activity."],
+          ["suggestions", "Submit or manage suggestions."],
+          ["welcomelog", "Configure welcome logs."],
+          ["goodbyelog", "Configure goodbye logs."],
+          ["updates", "View bot updates."]
+        ]
+      },
+      {
+        name: "Arcade & Games",
+        commands: [
+          ["riddle", "Play a riddle game."],
+          ["trivia", "Play a trivia game."]
+        ]
+      },
+      {
+        name: "Server Settings",
+        commands: [
+          ["lock", "Lock a channel."],
+          ["unlock", "Unlock a channel."],
+          ["slowmode", "Set channel slowmode."],
+          ["nick", "Manage a member nickname."],
+          ["remove", "Remove a configured item or entry."]
+        ]
+      },
+      {
+        name: "Game Monitor",
+        commands: [
+          ["gamemonitor", "Manage game monitoring features."]
+        ]
+      },
+      {
+        name: "Moderation",
+        commands: [
+          ["ban", "Ban a member from the server."],
+          ["kick", "Kick a member from the server."],
+          ["purge", "Bulk-delete messages."],
+          ["clear", "Clear messages or entries."],
+          ["unban", "Remove a user ban."],
+          ["timeout", "Apply a timeout to a member."],
+          ["untimeout", "Remove a member timeout."],
+          ["warn", "Issue a warning to a member."],
+          ["warnings", "View member warnings."],
+          ["clearwarns", "Clear member warnings."]
+        ]
+      },
+      {
+        name: "Information",
+        commands: [
+          ["help", "View the command help menu."],
+          ["ping", "Check bot response latency."],
+          ["serverinfo", "View server information."],
+          ["weather", "Check weather information."],
+          ["calculator", "Use the calculator."],
+          ["math", "Use mathematical tools."],
+          ["rank", "View your leveling rank card."],
+          ["stats", "View bot statistics."]
+        ]
+      },
+      {
+        name: "Global Network",
+        commands: [
+          ["global", "Access global network features."],
+          ["globalpulse", "View global network activity."],
+          ["networkstatus", "View the network overview."],
+          ["networkhealth", "Check network health information."]
+        ]
+      },
+      {
+        name: "Bot Status Monitor",
+        commands: [
+          ["ping", "Check bot response latency."],
+          ["stats", "View bot statistics."],
+          ["networkstatus", "View network status."],
+          ["networkhealth", "View health checks."],
+          ["downtime", "View downtime information."]
+        ]
+      },
+      {
+        name: "Suggestions",
+        commands: [
+          ["suggestions", "Submit and manage suggestions."]
+        ]
+      },
+      {
+        name: "Ticket System",
+        commands: [
+          ["ticket", "Access ticket system features."]
+        ]
+      },
+      {
+        name: "Administration",
+        commands: [
+          ["blacklist", "Manage bot-level blacklist entries."],
+          ["downtime", "Manage downtime information."]
+        ]
+      },
+      {
+        name: "EXP & Leveling",
+        commands: [
+          ["rank", "View your rank and experience."],
+          ["leaderboard", "View the experience leaderboard."],
+          ["top", "View top users."]
+        ]
+      }
+    ];
+
+    const commandList = document.getElementById("commandList");
+    const searchInput = document.getElementById("commandSearch");
+    const emptyMessage = document.getElementById("commandEmpty");
+
+    const allCommands = new Set();
+
+    categories.forEach(category => {
+      category.commands.forEach(command => allCommands.add(command[0]));
+    });
+
+    document.getElementById("totalCommands").textContent = allCommands.size;
+    document.getElementById("totalCategories").textContent = categories.length;
+
+    function renderCategories(search = "") {
+      commandList.innerHTML = "";
+
+      let visibleCategories = 0;
+      const query = search.toLowerCase().trim();
+
+      categories.forEach((category, index) => {
+        const matchingCommands = category.commands.filter(command => {
+          return command[0].toLowerCase().includes(query) ||
+            command[1].toLowerCase().includes(query);
+        });
+
+        if (matchingCommands.length === 0) return;
+
+        visibleCategories++;
+
+        const article = document.createElement("article");
+        article.className = "command-category";
+        if (query) article.classList.add("open");
+
+        const button = document.createElement("button");
+        button.className = "category-toggle";
+        button.type = "button";
+        button.setAttribute("aria-expanded", query ? "true" : "false");
+
+        const name = document.createElement("span");
+        name.className = "category-name";
+        name.textContent = category.name;
+
+        const meta = document.createElement("span");
+        meta.className = "category-meta";
+
+        const count = document.createElement("span");
+        count.className = "category-count";
+        count.textContent = matchingCommands.length + " commands";
+
+        const arrow = document.createElement("span");
+        arrow.className = "category-arrow";
+        arrow.textContent = "⌄";
+
+        meta.append(count, arrow);
+        button.append(name, meta);
+
+        const content = document.createElement("div");
+        content.className = "category-content";
+
+        const items = document.createElement("div");
+        items.className = "command-items";
+
+        matchingCommands.forEach(command => {
+          const item = document.createElement("div");
+          item.className = "command-item";
+
+          const code = document.createElement("code");
+          code.textContent = "/" + command[0];
+
+          const description = document.createElement("p");
+          description.textContent = command[1];
+
+          item.append(code, description);
+          items.append(item);
+        });
+
+        content.append(items);
+        article.append(button, content);
+
+        button.addEventListener("click", () => {
+          article.classList.toggle("open");
+          button.setAttribute(
+            "aria-expanded",
+            article.classList.contains("open") ? "true" : "false"
+          );
+        });
+
+        commandList.append(article);
+      });
+
+      emptyMessage.style.display = visibleCategories === 0 ? "block" : "none";
+    }
+
+    searchInput.addEventListener("input", event => {
+      renderCategories(event.target.value);
+    });
+
+    renderCategories();
+  </script>
+
+  <script src="script.js"></script>
 </body>
 </html>
