@@ -1,38 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   // Smooth navigation
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener("click", event => {
-      const target = document.querySelector(link.getAttribute("href"));
+      const href = link.getAttribute("href");
+
+      if (!href || href === "#") return;
+
+      const target = document.querySelector(href);
 
       if (target) {
         event.preventDefault();
+
         target.scrollIntoView({
-          behavior: "smooth"
+          behavior: "smooth",
+          block: "start"
         });
       }
     });
   });
 
-  // Reveal elements when scrolling
-  const revealElements = document.querySelectorAll(
-    ".feature-card, .about, .hero"
-  );
+  // Feature cards reveal animation
+  const cards = document.querySelectorAll(".feature-card");
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
     });
-  }, {
-    threshold: 0.15
-  });
 
-  revealElements.forEach(element => {
-    observer.observe(element);
-  });
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  } else {
+    cards.forEach(card => {
+      card.classList.add("visible");
+    });
+  }
 
-  // Footer year
+  // Dynamic footer year
   const footerText = document.querySelector("footer p");
 
   if (footerText) {
@@ -40,5 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `© ${new Date().getFullYear()} AMARA Symphora. All rights reserved.`;
   }
 
+  // Website initialization
   console.log("AMARA Symphora website initialized.");
+
 });
