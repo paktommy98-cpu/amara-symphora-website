@@ -150,6 +150,7 @@ header {
 .hero h1,
 .hero .description,
 .hero .actions,
+.hero .support-action,
 .hero .status {
   animation: fadeUp 0.9s ease both;
 }
@@ -232,6 +233,30 @@ header {
   transform: translateY(-3px);
 }
 
+/* SUPPORT SERVERS */
+
+.support-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+  animation-delay: 0.55s !important;
+}
+
+.support-action .button {
+  min-width: 190px;
+  border-color: rgba(74, 120, 255, 0.35);
+  background: rgba(74, 120, 255, 0.07);
+}
+
+.support-action .button:hover {
+  border-color: var(--bright);
+  color: white;
+  background: rgba(74, 120, 255, 0.15);
+  box-shadow: 0 8px 25px rgba(42, 82, 190, 0.18);
+}
+
 /* STATUS */
 
 .status {
@@ -239,7 +264,7 @@ header {
   color: var(--muted);
   font-size: 12px;
   letter-spacing: 2.5px;
-  animation-delay: 0.6s !important;
+  animation-delay: 0.7s !important;
 }
 
 .status-dot {
@@ -593,6 +618,15 @@ footer a:hover {
 
   .button {
     padding: 13px 19px;
+  }
+
+  .support-action {
+    margin-top: 14px;
+  }
+
+  .support-action .button {
+    width: auto;
+    min-width: 190px;
   }
 
   .features,
