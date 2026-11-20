@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Feature cards reveal animation
+  // Feature cards reveal
   const cards = document.querySelectorAll(".feature-card");
 
   if ("IntersectionObserver" in window) {
@@ -35,21 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
       threshold: 0.15
     });
 
-    cards.forEach(card => {
-      observer.observe(card);
-    });
+    cards.forEach(card => observer.observe(card));
   } else {
-    cards.forEach(card => {
-      card.classList.add("visible");
-    });
+    cards.forEach(card => card.classList.add("visible"));
   }
 
   // Dynamic footer year
-  const footerText = document.querySelector("footer p");
+  const footerYear = document.getElementById("footer-year");
 
-  if (footerText) {
-    footerText.textContent =
-      `© ${new Date().getFullYear()} AMARA Symphora. All rights reserved.`;
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear();
   }
 
   // Website initialization
