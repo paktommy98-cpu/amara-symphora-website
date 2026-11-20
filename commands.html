@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -311,127 +312,147 @@
   </footer>
 
   <script>
+    "use strict";
+
     const categories = [
       {
         name: "Music",
         commands: [
           ["play", "Play music from a supported source."],
-          ["stop", "Stop playback."],
-          ["skip", "Skip the current track."],
-          ["nowplaying", "Show the currently playing track."],
+          ["join", "Make AMARA join your voice channel."],
           ["leave", "Make AMARA leave the voice channel."],
-          ["loop", "Control the playback loop mode."],
           ["pause", "Pause the current track."],
-          ["queue", "View the music queue."],
-          ["lyrics", "Find lyrics for a track."],
-          ["join", "Join your voice channel."],
-          ["247", "Control 24/7 voice channel mode."],
           ["resume", "Resume paused playback."],
-          ["autoplay", "Control automatic track suggestions."],
-          ["replay", "Replay the current track."],
+          ["skip", "Skip the current track."],
           ["previous", "Return to the previous track."],
+          ["stop", "Stop playback."],
+          ["queue", "View the current music queue."],
+          ["clear", "Clear the music queue."],
+          ["remove", "Remove a track from the queue."],
           ["shuffle", "Shuffle the music queue."],
-          ["seek", "Move to a position in the current track."]
+          ["loop", "Control the playback loop mode."],
+          ["seek", "Move to a position in the current track."],
+          ["replay", "Replay the current track."],
+          ["nowplaying", "Show the currently playing track."],
+          ["lyrics", "Find lyrics for a track."],
+          ["top", "View top users."]
         ]
       },
       {
         name: "Audio Settings",
         commands: [
+          ["autoplay", "Control automatic track suggestions."],
           ["bassboost", "Adjust the bass enhancement."],
           ["equalizer", "Adjust audio equalizer settings."],
-          ["volume", "Change playback volume."],
           ["filter", "Apply an audio filter."],
           ["filters", "View or manage audio filters."],
-          ["settings", "Manage available settings."]
+          ["volume", "Change playback volume."]
         ]
       },
       {
         name: "Giveaway",
         commands: [
-          ["giveaway", "Create and manage giveaways."]
+          ["giveaway start", "Start a new giveaway."],
+          ["giveaway end", "End an active giveaway."],
+          ["giveaway reroll", "Select a new giveaway winner."]
         ]
       },
       {
         name: "User & Social",
         commands: [
-          ["daily", "Claim your daily reward."],
-          ["profile", "View a user profile."],
-          ["mystats", "View your personal statistics."],
-          ["user", "View user information."],
           ["badges", "View available user badges."],
-          ["anniversary", "View anniversary information."]
+          ["leaderboard", "View the experience leaderboard."],
+          ["profile", "View a user profile."],
+          ["user", "View user information."]
         ]
       },
       {
         name: "Security",
         commands: [
-          ["blacklist", "Manage the bot blacklist."],
-          ["antiraid", "Manage anti-raid protection."],
-          ["antilink", "Manage anti-link protection."],
-          ["verify", "Use the server verification feature."],
-          ["securitylog", "View or configure security logs."]
+          ["antilink status", "View anti-link protection status."],
+          ["antilink on", "Enable anti-link protection."],
+          ["antilink off", "Disable anti-link protection."],
+          ["antiraid status", "View anti-raid protection status."],
+          ["antiraid on", "Enable anti-raid protection."],
+          ["antiraid off", "Disable anti-raid protection."],
+          ["securitylog setup", "Configure the security log channel."],
+          ["securitylog status", "View security log configuration."],
+          ["securitylog off", "Disable security logging."]
         ]
       },
       {
         name: "Community",
         commands: [
-          ["global", "Access global community features."],
-          ["globalpulse", "View global network activity."],
-          ["suggestions", "Submit or manage suggestions."],
-          ["welcomelog", "Configure welcome logs."],
-          ["goodbyelog", "Configure goodbye logs."],
-          ["updates", "View bot updates."]
+          ["welcomelog set", "Set the welcome log channel."],
+          ["welcomelog status", "View welcome log configuration."],
+          ["welcomelog off", "Disable welcome logging."],
+          ["goodbyelog setup", "Configure the goodbye log channel."],
+          ["goodbyelog status", "View goodbye log configuration."],
+          ["goodbyelog off", "Disable goodbye logging."]
         ]
       },
       {
         name: "Arcade & Games",
         commands: [
+          ["trivia", "Play a trivia game."],
           ["riddle", "Play a riddle game."],
-          ["trivia", "Play a trivia game."]
+          ["math", "Play a math game."]
         ]
       },
       {
         name: "Server Settings",
         commands: [
-          ["lock", "Lock a channel."],
-          ["unlock", "Unlock a channel."],
-          ["slowmode", "Set channel slowmode."],
-          ["nick", "Manage a member nickname."],
-          ["remove", "Remove a configured item or entry."]
+          ["247 on", "Enable 24/7 voice channel mode."],
+          ["247 off", "Disable 24/7 voice channel mode."],
+          ["247 status", "View 24/7 voice channel status."],
+          ["settings prefix", "Configure the server prefix."],
+          ["verify setup", "Set up server verification."],
+          ["verify panel", "Display the verification panel."],
+          ["verify status", "View verification configuration."],
+          ["verify disable", "Disable server verification."]
         ]
       },
       {
         name: "Game Monitor",
         commands: [
-          ["gamemonitor", "Manage game monitoring features."]
+          ["gamemonitor panel", "Display the game monitor panel."],
+          ["gamemonitor add", "Add a game to monitoring."],
+          ["gamemonitor remove", "Remove a monitored game."],
+          ["gamemonitor enable", "Enable game monitoring."],
+          ["gamemonitor disable", "Disable game monitoring."],
+          ["gamemonitor status", "View game monitor status."]
         ]
       },
       {
         name: "Moderation",
         commands: [
-          ["ban", "Ban a member from the server."],
           ["kick", "Kick a member from the server."],
-          ["purge", "Bulk-delete messages."],
-          ["clear", "Clear messages or entries."],
+          ["ban", "Ban a member from the server."],
           ["unban", "Remove a user ban."],
           ["timeout", "Apply a timeout to a member."],
           ["untimeout", "Remove a member timeout."],
           ["warn", "Issue a warning to a member."],
           ["warnings", "View member warnings."],
-          ["clearwarns", "Clear member warnings."]
+          ["clearwarns", "Clear member warnings."],
+          ["purge", "Bulk-delete messages."],
+          ["lock", "Lock a channel."],
+          ["unlock", "Unlock a channel."],
+          ["slowmode", "Set channel slowmode."],
+          ["nick", "Manage a member nickname."]
         ]
       },
       {
         name: "Information",
         commands: [
           ["help", "View the command help menu."],
-          ["ping", "Check bot response latency."],
-          ["serverinfo", "View server information."],
-          ["weather", "Check weather information."],
           ["calculator", "Use the calculator."],
-          ["math", "Use mathematical tools."],
-          ["rank", "View your leveling rank card."],
-          ["stats", "View bot statistics."]
+          ["ping", "Check bot response latency."],
+          ["weather", "Check weather information."],
+          ["serverinfo", "View server information."],
+          ["serverinfo allservers", "View information about all bot servers."],
+          ["stats", "View bot statistics."],
+          ["updates", "View bot updates."],
+          ["anniversary", "View anniversary information."]
         ]
       },
       {
@@ -446,38 +467,47 @@
       {
         name: "Bot Status Monitor",
         commands: [
-          ["ping", "Check bot response latency."],
-          ["stats", "View bot statistics."],
-          ["networkstatus", "View network status."],
-          ["networkhealth", "View health checks."],
-          ["downtime", "View downtime information."]
+          ["downtime setup", "Configure downtime notifications."],
+          ["downtime status", "View downtime monitoring status."],
+          ["downtime list", "View downtime records."],
+          ["downtime off", "Disable downtime monitoring."]
         ]
       },
       {
         name: "Suggestions",
         commands: [
-          ["suggestions", "Submit and manage suggestions."]
+          ["suggestions setup", "Configure the suggestions system."],
+          ["suggestions panel", "Display the suggestions panel."],
+          ["suggestions close", "Close a suggestion."],
+          ["suggestions edit", "Edit a suggestion."],
+          ["suggestions reset", "Reset suggestion settings."],
+          ["suggestions status", "View suggestions configuration."]
         ]
       },
       {
         name: "Ticket System",
         commands: [
-          ["ticket", "Access ticket system features."]
+          ["ticket setup", "Configure the ticket system."],
+          ["ticket close", "Close an active ticket."],
+          ["ticket claim", "Claim a ticket."],
+          ["ticket add", "Add a member to a ticket."],
+          ["ticket remove", "Remove a member from a ticket."]
         ]
       },
       {
         name: "Administration",
         commands: [
-          ["blacklist", "Manage bot-level blacklist entries."],
-          ["downtime", "Manage downtime information."]
+          ["blacklist add", "Add a user to the bot blacklist."],
+          ["blacklist remove", "Remove a user from the bot blacklist."],
+          ["blacklist list", "View bot blacklist entries."]
         ]
       },
       {
         name: "EXP & Leveling",
         commands: [
-          ["rank", "View your rank and experience."],
-          ["leaderboard", "View the experience leaderboard."],
-          ["top", "View top users."]
+          ["daily", "Claim your daily reward."],
+          ["mystats", "View your personal statistics."],
+          ["rank", "View your leveling rank card."]
         ]
       }
     ];
@@ -485,15 +515,16 @@
     const commandList = document.getElementById("commandList");
     const searchInput = document.getElementById("commandSearch");
     const emptyMessage = document.getElementById("commandEmpty");
+    const totalCommandsElement = document.getElementById("totalCommands");
+    const totalCategoriesElement = document.getElementById("totalCategories");
 
-    const allCommands = new Set();
+    const totalCommands = categories.reduce(
+      (total, category) => total + category.commands.length,
+      0
+    );
 
-    categories.forEach(category => {
-      category.commands.forEach(command => allCommands.add(command[0]));
-    });
-
-    document.getElementById("totalCommands").textContent = allCommands.size;
-    document.getElementById("totalCategories").textContent = categories.length;
+    totalCommandsElement.textContent = totalCommands;
+    totalCategoriesElement.textContent = categories.length;
 
     function renderCategories(search = "") {
       commandList.innerHTML = "";
@@ -501,7 +532,7 @@
       let visibleCategories = 0;
       const query = search.toLowerCase().trim();
 
-      categories.forEach((category, index) => {
+      categories.forEach(category => {
         const matchingCommands = category.commands.filter(command => {
           return command[0].toLowerCase().includes(query) ||
             command[1].toLowerCase().includes(query);
@@ -513,7 +544,10 @@
 
         const article = document.createElement("article");
         article.className = "command-category";
-        if (query) article.classList.add("open");
+
+        if (query) {
+          article.classList.add("open");
+        }
 
         const button = document.createElement("button");
         button.className = "category-toggle";
@@ -563,6 +597,7 @@
 
         button.addEventListener("click", () => {
           article.classList.toggle("open");
+
           button.setAttribute(
             "aria-expanded",
             article.classList.contains("open") ? "true" : "false"
@@ -572,7 +607,8 @@
         commandList.append(article);
       });
 
-      emptyMessage.style.display = visibleCategories === 0 ? "block" : "none";
+      emptyMessage.style.display =
+        visibleCategories === 0 ? "block" : "none";
     }
 
     searchInput.addEventListener("input", event => {
